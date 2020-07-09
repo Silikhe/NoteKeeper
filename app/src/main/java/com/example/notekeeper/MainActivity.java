@@ -1,6 +1,7 @@
 package com.example.notekeeper;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -37,7 +38,13 @@ public class MainActivity extends AppCompatActivity {
         adapterCourses.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCourses.setAdapter(adapterCourses);
 
+        readDisplayStateValue();
 
+    }
+
+    private void readDisplayStateValue() {
+        Intent intent = getIntent();
+        NoteInfo note = intent.getParcelableExtra(NOTE_INFO);
     }
 
     @Override
