@@ -1,16 +1,10 @@
 package com.example.notekeeper;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
-import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,8 +16,9 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String NOTE_INFO = "com.example.notekeeper.NOTE_INFO";
+    public static final String NOTE_POSITION = "com.example.notekeeper.NOTE_POSITION";
     private NoteInfo mNote;
+    private boolean mIsNewNote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         EditText textNoteTitle = findViewById(R.id.text_note_title);
         EditText textNoteText = findViewById(R.id.text_note_text);
 
+        if (!mIsNewNote)
         displayNotes(spinnerCourses, textNoteTitle, textNoteText);
 
     }
@@ -61,7 +57,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void readDisplayStateValue() {
         Intent intent = getIntent();
-        mNote = intent.getParcelableExtra(NOTE_INFO);
+        int position = intent.getIntExtra(NOTE_POSITION, POSITION_NOT_SET());
+        mIsNewNote = position == POSITION_NOT_SET();
+        if (!mIsNewNote)
+            mNote= DataManager.getInstance().getNotes().get(position);
+    }
+
+    private int POSITION_NOT_SET() {
+        return -1;
     }
 
     @Override
