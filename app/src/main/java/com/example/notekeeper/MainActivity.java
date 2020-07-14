@@ -17,6 +17,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     public static final String NOTE_POSITION = "com.example.notekeeper.NOTE_POSITION";
+    public static final int POSITION_NOT_SET = -1;
     private NoteInfo mNote;
     private boolean mIsNewNote;
 
@@ -57,15 +58,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void readDisplayStateValue() {
         Intent intent = getIntent();
-        int position = intent.getIntExtra(NOTE_POSITION, POSITION_NOT_SET());
-        mIsNewNote = position == POSITION_NOT_SET();
+        int position = intent.getIntExtra(NOTE_POSITION, POSITION_NOT_SET);
+        mIsNewNote = position == POSITION_NOT_SET;
         if (!mIsNewNote)
             mNote= DataManager.getInstance().getNotes().get(position);
     }
-
-    private int POSITION_NOT_SET() {
-        return -1;
-    }
+    
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
