@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     private NoteInfo mNote;
     private boolean mIsNewNote;
     private Spinner mSpinnerCourses;
+    private EditText mTextNoteTitle;
+    private EditText mTextNoteText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +41,11 @@ public class MainActivity extends AppCompatActivity {
 
         readDisplayStateValue();
 
-        EditText textNoteTitle = findViewById(R.id.text_note_title);
-        EditText textNoteText = findViewById(R.id.text_note_text);
+        mTextNoteTitle = findViewById(R.id.text_note_title);
+        mTextNoteText = findViewById(R.id.text_note_text);
 
         if (!mIsNewNote)
-        displayNotes(mSpinnerCourses, textNoteTitle, textNoteText);
+        displayNotes(mSpinnerCourses, mTextNoteTitle, mTextNoteText);
 
     }
 
@@ -92,6 +94,13 @@ public class MainActivity extends AppCompatActivity {
     private void sendEmail() {
         CourseInfo courses = (CourseInfo) mSpinnerCourses.getSelectedItem();
         String subject = mTextNoteTitle.getText().toString();
+        String text = "Check out what I learnt in pluralsight course \" " +
+                courses.getTitle() +"\"\n" + mTextNoteText.getText();
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("message/rfc2822");
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        intent.putExtra(Intent.EXTRA_SUBJECT, text);
+        startActivity(intent);
 
     }
 }
