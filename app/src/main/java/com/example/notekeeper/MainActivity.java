@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText mTextNoteText;
     private int mNotePosition;
     private boolean mIsCanceling;
+    private String originalNoteCourseId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +43,20 @@ public class MainActivity extends AppCompatActivity {
         mSpinnerCourses.setAdapter(adapterCourses);
 
         readDisplayStateValue();
-
+        saveOriginalNoteValue();
+        
         mTextNoteTitle = findViewById(R.id.text_note_title);
         mTextNoteText = findViewById(R.id.text_note_text);
 
         if (!mIsNewNote)
         displayNotes(mSpinnerCourses, mTextNoteTitle, mTextNoteText);
 
+    }
+
+    private void saveOriginalNoteValue() {
+        if(mIsNewNote)
+            return;
+        originalNoteCourseId = mNote.getCourse().getCourseId();
     }
 
     private void displayNotes(Spinner spinnerCourses, EditText textNoteTitle, EditText textNoteText) {
