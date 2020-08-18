@@ -14,9 +14,19 @@ public class DataManagerTest {
         final String noteText = "This is the Body of my note text";
 
         int noteIndex = dm.createNewNote();
-        NoteInfo newnote = dm.getNotes().get(noteIndex);
-        newnote.setCourse(course);
-        newnote.setText(noteText);
-        newnote.setTitle(noteTitle);
+        NoteInfo newNote = dm.getNotes().get(noteIndex);
+        newNote.setCourse(course);
+        newNote.setText(noteText);
+        newNote.setTitle(noteTitle);
+
+        NoteInfo compareNotes = dm.getNotes().get(noteIndex);
+//        assertSame(newNote, compareNotes);
+        assertEquals(compareNotes.getCourse(), course);
+        assertEquals(compareNotes.getTitle(), noteTitle);
+        assertEquals(compareNotes.getText(), noteText);
+
+
+
+
     }
 }
