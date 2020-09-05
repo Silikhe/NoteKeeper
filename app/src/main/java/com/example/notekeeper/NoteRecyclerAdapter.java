@@ -47,15 +47,5 @@ public class NoteRecyclerAdapter extends RecyclerView.Adapter<NoteRecyclerAdapte
             mTextTitle = (TextView) itemView.findViewById(R.id.text_title);
         }
     }
-    public class viewHolder extends RecyclerView.ViewHolder{
 
-        private final TextView mTextCourse;
-        private final TextView mTextTitle;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            mTextCourse = (TextView) itemView.findViewById(R.id.text_course);
-            mTextTitle = (TextView) itemView.findViewById(R.id.text_title);
-        }
-    }
 }
